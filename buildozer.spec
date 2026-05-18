@@ -7,7 +7,7 @@ source.include_exts = py,png,jpg,kv,atlas
 version = 1.0
 
 # ✅ FIXED MOBILITY DEPENDENCIES: Forcing Python 3.10 components skips compiler crashing hooks
-requirements = python3==3.10.12,hostpython3==3.10.12,kivy==2.3.0,pyjnius==1.5.0,pygame
+requirements = python3,kivy==2.3.0,pygame
 
 orientation = landscape
 fullscreen = 1
