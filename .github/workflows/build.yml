@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04  # Forces a stable Linux environment
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout Code
@@ -18,8 +18,10 @@ jobs:
           sudo apt install -y openjdk-17-jdk python3-pip pipx unzip zip libffi-dev libssl-dev autoconf autotools-dev libtool
           pipx install buildozer
 
-      - name: Build Android App using Buildozer
+      - name: Clean Workspace Cache and Build APK
         run: |
+          # ✅ PURGE STALE CACHES: Prevents old crashes from bleeding into the new run
+          pipx run buildozer appclean
           pipx run buildozer android debug
         id: build
 
