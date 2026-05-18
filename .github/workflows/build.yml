@@ -1,27 +1,30 @@
 name: Build Android APK
 
-# ✅ AUTOMATIC TRIGGER: Builds the APK automatically whenever you update your code!
 on:
   push:
     branches: [ "main", "master" ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # Forces a stable Linux environment
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
-        with:
-          workdir: .
-          buildozer_version: stable
+      - name: Install System Tools
+        run: |
+          sudo apt update
+          sudo apt install -y openjdk-17-jdk python3-pip pipx unzip zip libffi-dev libssl-dev autoconf autotools-dev libtool
+          pipx install buildozer
+
+      - name: Build Android App using Buildozer
+        run: |
+          pipx run buildozer android debug
+        id: build
 
       - name: Upload Finished APK File
         uses: actions/upload-artifact@v4
         with:
-          name: package
-          path: ${{ steps.buildozer.outputs.filename }}
+          name: BLP-Cyber-Pong
+          path: bin/*.apk
