@@ -1,35 +1,23 @@
 [app]
-# (str) Title of your application
 title = BLP Cyber Pong
-
-# (str) Package name
 package.name = blp_cyber_pong
-
-# (str) Package domain (needed for android packaging)
 package.domain = com.bigluiproductions
-
-# (str) Source code directory
 source.dir = .
-
-# (list) Source files to include (let it find python files)
 source.include_exts = py,png,jpg,kv,atlas
 
-# (list) Application requirements
-# Crucial: Must include python3 and pygame
-requirements = python3,pygame
+# ✅ CRUCIAL: Added the exact version number so the build doesn't crash
+version = 1.0
 
-# (str) Supported orientations (landscape forces full widescreen mobile format)
+# ✅ CRUCIAL: Locked down the exact stable Pygame version for mobile
+requirements = python3,pygame==2.5.2
+
 orientation = landscape
-
-# (int) Fullscreen mode (1 = True, removes phone notification bar)
 fullscreen = 1
 
-# (list) Permissions
+# ✅ CRUCIAL: Forces the compiler to automatically accept Android SDK licenses
+android.accept_licenses = 1
 android.permissions = INTERNET
-
-# (int) Target Android API, leave default or use 33/34
 android.api = 34
 
 [buildozer]
-# (int) Log level (0 = error only, 1 = info, 2 = debug)
 log_level = 2
