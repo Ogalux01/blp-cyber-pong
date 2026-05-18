@@ -4,20 +4,16 @@ package.name = blp_cyber_pong
 package.domain = com.bigluiproductions
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
-
-# ✅ CRUCIAL: Added the exact version number so the build doesn't crash
 version = 1.0
 
-# ✅ CRUCIAL: Locked down the exact stable Pygame version for mobile
-requirements = python3,kivy==2.3.0,pygame
+# ✅ FIXED MOBILITY DEPENDENCIES: Forcing Python 3.10 components skips compiler crashing hooks
+requirements = python3==3.10.12,hostpython3==3.10.12,kivy==2.3.0,pyjnius==1.5.0,pygame
 
 orientation = landscape
 fullscreen = 1
-
-# ✅ CRUCIAL: Forces the compiler to automatically accept Android SDK licenses
 android.accept_licenses = 1
 android.permissions = INTERNET
-android.api = 34
+android.api = 33
 
 [buildozer]
 log_level = 2
