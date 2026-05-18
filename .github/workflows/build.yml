@@ -6,23 +6,20 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    # 🚀 USE A PRE-BUILT CONTAINER: This environment includes all working Android tool chains pre-installed
+    container:
+      image: ghcr.io/kivy/buildozer:master
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Install System Tools
+      - name: Build Android App with Buildozer
         run: |
-          sudo apt update
-          sudo apt install -y openjdk-17-jdk python3-pip pipx unzip zip libffi-dev libssl-dev autoconf autotools-dev libtool
-          pipx install buildozer
-
-      - name: Clean Workspace Cache and Build APK
-        run: |
-          # ✅ PURGE STALE CACHES: Prevents old crashes from bleeding into the new run
-          pipx run buildozer appclean
-          pipx run buildozer android debug
+          # Safe workspace permission adjustment for container isolation
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          buildozer android debug
         id: build
 
       - name: Upload Finished APK File
